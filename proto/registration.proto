@@ -1,0 +1,56 @@
+
+syntax = "proto3";
+
+
+package registration;
+//
+
+message Empty {}
+
+
+
+message ReqUserRegistration{
+  string Email=1;
+  string Password=2;
+  string Status=3;
+  string CreateDate=4;
+  string UpdateDate=5;
+  string StatusDate=6;
+  UserType UserType=7;
+  string FirstName=8;
+  string LastName=9;
+  repeated string Customers=10;
+}
+
+
+
+message InsertUserRegistration{
+  string Id=1;
+  ReqUserRegistration userregistration=2;
+}
+
+
+message UserRegistrationProfile{
+  string Id=1;
+  string Email=2;
+  string Status=4;
+  string CreateDate=5;
+  string UpdateDate=6;
+  string StatusDate=7;
+  UserType UserType=8;
+  string FirstName=9;
+  string LastName=10;
+  repeated string Customers=11;
+}
+
+
+enum UserType {
+  ADMINISTRATOR=0;
+  ANALYST=1;
+}
+
+
+
+service UserRegistrationReq {
+  rpc UserRegistration(ReqUserRegistration) returns (Empty);
+}

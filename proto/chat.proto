@@ -1,0 +1,607 @@
+
+syntax = "proto3";
+
+
+package chat;
+//
+
+//import "google/protobuf/timestamp.proto";
+//import "google/protobuf/any.proto";
+
+
+message DataList {
+  int64  total=1;
+  repeated InsertMsg data=2;
+}
+
+message InsertMsg{
+  string Id=1;
+  Msg msg=2;
+
+}
+message Msg {
+  string CustomerID=2;
+  string SupplierID=3;
+  string DateCreated=4;
+  string DateUpdated=6;
+  string Status=8;
+  int64  ObservationID=9;
+  string DashboardID=10;
+  string ObservationBody=11;
+  string ObservationFeedback=12;
+  string Type=13;
+  string AnalystID=14;
+  string AnalystName=15;
+  string Title=16;
+  string CreatedBy =17;
+  string UpdatedBy =18;
+  string ToUserEmail =19;
+  string ToUserName =20;
+  string StatusDate=21;
+}
+
+message SupplierAddressType {
+      string AddressLine1=1;
+      string PostalCode=2;
+      string Phone=3;
+      string ContactEmail=4;
+      string ProvinceCode=5;
+      string AddressLine2=6;
+      string ShortName=7;
+      string Fax=8;
+      string City=9;
+      string State=10;
+      string Country=11;
+}
+
+message SupplierContactType{
+     string ContactFirstName=1;
+     string ContactMiddleName=2;
+     string ContactLastName=3;
+     string ContactEmail=4;
+     string ContactPhone=5;
+}
+
+message Supplier{
+  string SupplierID =1;
+  string SupplierName=2;
+  SupplierAddressType SupplierAddress=3;
+  string CustomerID=4;
+  SupplierContactType SupplierContact=5;
+  string CustomerCorporateDivision=6;
+  string SupplierClassification=7;
+  string SupplierCurrency=8;
+
+}
+
+message SupplierList {
+  int64  total=1;
+  repeated Supplier SupplierData=2;
+}
+
+
+message CustomerAddressType {
+  string AddressLine1=1;
+  string PostalCode=2;
+  string Phone=3;
+  string ContactEmail=4;
+  string ProvinceCode=5;
+  string AddressLine2=6;
+  string ShortName=7;
+  string Fax=8;
+  string City=9;
+  string State=10;
+  string Country=11;
+}
+
+message CustomerContactType{
+  string ContactFirstName=1;
+  string ContactMiddleName=2;
+  string ContactLastName=3;
+  string ContactEmail=4;
+  string ContactPhone=5;
+}
+
+
+message Customer {
+  string CustomerNumber=1;
+  string CustomerID=2;
+  string CustomerName=3;
+  CustomerContactType CustomerContact=4;
+  CustomerAddressType CustomerAddress=5;
+}
+
+message CustomerList {
+  int64  total=1;
+  repeated Customer CustomerData=2;
+}
+
+
+message Req {
+  string user_name = 1;
+}
+message Search {
+  string search=1;
+  string limit =2;
+  string skip=3;
+  string projection=4;
+  string sort=5;
+  string aggregation=6;
+}
+message UpdateRequest{
+  string filter=1;
+  string Id=2;
+    Msg  msg=3;
+}
+message Login{
+  string username =1;
+  string password=2;
+
+}
+message LoginToken{
+  string token=1;
+  UserType usertype=2;
+}
+
+
+message Empty {}
+
+message Dashboard {
+  string Name=1;
+  string Url=2;
+  string CreateDate=3;
+  string UpdateDate=4;
+  string CreatedBy =5;
+  string UpdatedBy =6;
+  string Status =7;
+  string StatusDate=8;
+}
+
+message DashboardData {
+  string Id=1;
+  string Name=2;
+  string Url=3;
+  string CreateDate=4;
+  string UpdateDate=5;
+  string CreatedBy =6;
+  string UpdatedBy =7;
+  string Status =8;
+  string StatusDate=9;
+}
+
+message DashboardList {
+  int64  total=1;
+  repeated DashboardData DashboardData=2;
+}
+
+message InsertDashboard{
+  string Id=1;
+  Dashboard dashboard=2;
+
+}
+message UpdateDashboard{
+  string filter=1;
+  string Id=2;
+  Dashboard  dashboard=3;
+}
+message DashboardContentReq{
+  string CustomerID=1;
+  string Url=2;
+}
+message DashboardContent{
+  string Content=1;
+}
+
+message UploadFile{
+  bytes content=1;
+}
+
+
+message MetaData {
+  string name = 1;
+  string type = 2;
+}
+
+message File {
+  bytes content = 1;
+}
+
+
+message FileUploadRequest {
+    string name = 1;
+    string type = 2;
+    string content=3;
+    string contenttype=4;
+}
+message FileDownloadRequest {
+    string Search=1;
+    string Id=2;
+}
+
+
+message ReqDashboardStatistics{
+  string UserName=1;
+  string CustomerID=2;
+  int32 Month=3;
+  int32 Year=4;
+  string CustomerNumber=5;
+  string EmailSearch=6;
+  string UserNameSearch=7;
+  int64 CurrentYearSearch=8;
+  int64 PreviousYearSearch=9;
+  int64 Skip=10;
+  int64 Limit=11;
+}
+
+message ReqStatisticsByUserYearMonth{
+  string CustomerID=1;
+  string EmailSearch=2;
+  string UserNameSearch=3;
+  int64 CurrentYearSearch=4;
+  int64 PreviousYearSearch=5;
+  int64 Skip=6;
+  int64 Limit=7;
+}
+
+
+message Statistic{
+  int32 Count=1;
+  int32 Month=2;
+  int32 Year=3;
+  string Status=4;
+  StatusData StatusData=5;
+
+}
+
+
+message ReqUserRegistration{
+  string Email=1;
+  string Password=2;
+  string Status=3;
+  string CreateDate=4;
+  string UpdateDate=5;
+  string StatusDate=6;
+  UserType UserType=7;
+  string FirstName=8;
+  string LastName=9;
+  repeated string Customers=10;
+}
+
+
+
+message InsertUserRegistration{
+  string Id=1;
+  ReqUserRegistration userregistration=2;
+}
+
+message UserRegistration{
+  string Id=1;
+  string Email=2;
+  string Password=3;
+  string Status=4;
+  string CreateDate=5;
+  string UpdateDate=6;
+  string StatusDate=7;
+  UserType UserType=8;
+  string FirstName=9;
+  string LastName=10;
+  repeated string Customers=11;
+}
+
+message UserRegistrationProfile{
+  string Id=1;
+  string Email=2;
+  string Status=4;
+  string CreateDate=5;
+  string UpdateDate=6;
+  string StatusDate=7;
+  UserType UserType=8;
+  string FirstName=9;
+  string LastName=10;
+  repeated string Customers=11;
+}
+
+
+enum UserType {
+  ADMINISTRATOR=0;
+  ANALYST=1;
+}
+
+
+message UserRegistrationList {
+  int64  total=1;
+  repeated UserRegistrationProfile userregistration=2;
+}
+
+message ReqUpdateUserRegistration{
+  string filter=1;
+  string Id=2;
+  ReqUserRegistration userregistration=3;
+}
+
+message StatusData {
+  string StatusName=1;
+  string IconName=2;
+  string IconColor=3;
+  string CreateDate=4;
+  string UpdateDate=5;
+  string CreatedBy =6;
+  string UpdatedBy =7;
+}
+
+
+message RecommendationsCountByMonthYear{
+  int32 Count=1;
+  int32 Month=2;
+  int32 Year=3;
+
+}
+
+
+message StatisticsList {
+  repeated  Statistic statistic=1;
+  repeated  RecommendationsCountByMonthYear recommendationscountbymonthyear=2;
+
+  repeated  RecommendationsCountByUserMonthYear recommendationscountbyusermonthyear=3;
+
+}
+
+
+message RecommendationsCountByUserMonthYearList{
+  repeated  RecommendationsCountByUserMonthYear recommendationscountbyusermonthyear=1;
+
+}
+message RecommendationsCountByUserMonthYear{
+  int32 Count=1;
+  int32 Month=2;
+  int32 Year=3;
+  string Status=4;
+  string UserName=5;
+  string Email=6;
+
+}
+
+//----------------
+message MenuGroup {
+  string MenuGroup=1;
+  int32 Order=2;
+  string CreateDate=3;
+  string UpdateDate=4;
+  string CreatedBy =5;
+  string UpdatedBy =6;
+  string Status =7;
+  string StatusDate=8;
+  string Icon=10;
+}
+
+message MenuGroupData {
+  string Id=1;
+  string MenuGroup=2;
+  int32 Order=3;
+  string CreateDate=4;
+  string UpdateDate=5;
+  string CreatedBy =6;
+  string UpdatedBy =7;
+  string Status =8;
+  string StatusDate=9;
+  string Icon=10;
+}
+
+message MenuGroupList {
+  int64  total=1;
+  repeated MenuGroupData MenuGroupData=2;
+}
+
+message InsertMenuGroup{
+  string Id=1;
+  MenuGroup menugroup=2;
+
+}
+message UpdateMenuGroup{
+  string filter=1;
+  string Id=2;
+  MenuGroup  menugroup=3;
+}
+//---------------
+
+
+message MenuOption {
+  string OptionName=1;
+  int32  Order=2;
+  string CreateDate=3;
+  string UpdateDate=4;
+  string CreatedBy =5;
+  string UpdatedBy =6;
+  string Status =7;
+  string StatusDate=8;
+  string Icon=9;
+  UserType UserType=10;
+  string MenuGroup=11;
+  string OptionHref=12;
+}
+
+message MenuOptionData {
+  string Id=1;
+  string OptionName=2;
+  int32  Order=3;
+  string CreateDate=4;
+  string UpdateDate=5;
+  string CreatedBy =6;
+  string UpdatedBy =7;
+  string Status =8;
+  string StatusDate=9;
+  string Icon=10;
+  UserType UserType=11;
+  string MenuGroup=12;
+  string   OptionHref=13;
+
+}
+
+message MenuOptionList {
+  int64  total=1;
+  repeated MenuOptionData MenuOptionData=2;
+}
+message InsertMenuOption{
+  string Id=1;
+  MenuOption menuoption=2;
+}
+message UpdateMenuOption{
+  string filter=1;
+  string Id=2;
+  MenuOption  menuoption=3;
+}
+message Menu{
+  string Id=1;
+  string MenuGroup=2;
+  int32 Order=3;
+  string CreateDate=4;
+  string UpdateDate=5;
+  string CreatedBy =6;
+  string UpdatedBy =7;
+  string Status =8;
+  string StatusDate=9;
+  string Icon=10;
+  repeated  MenuOptionData  MenuOptions=11;
+}
+
+message MenuList{
+  repeated   Menu menu=1;
+}
+
+message MenuRequest{
+  UserType UserType=1;
+}
+//---------------
+message ButtonToDisplay{
+    string ApplicationName =1;
+    string Display =2;
+    string UpdatedBy =3;
+    string Status=4;
+    string CreatedBy=5;
+    string CreateDate =6;
+    string ViewName=7;
+    string ButtonName=8;
+    string ThisButtonIsOnlyEnabledForTheOwner=9;
+    string UpdatedDate=10;
+}
+//---------------
+message ButtonToDisplayData{
+  string Id=1;
+  string ApplicationName =2;
+  string Display =3;
+  string UpdatedBy =4;
+  string Status=5;
+  string CreatedBy=6;
+  string CreateDate =7;
+  string ViewName=8;
+  string ButtonName=9;
+  string ThisButtonIsOnlyEnabledForTheOwner=10;
+  string UpdatedDate=11;
+}
+//---------------
+message ButtonToDisplayRequest{
+  ButtonToDisplay ButtonToDisplay=1;
+}
+//---------------
+message ButtonToDisplayList {
+  int64  total=1;
+  repeated ButtonToDisplayData ButtonToDisplayData=2;
+}
+message InsertButtonToDisplay{
+  string Id=1;
+  ButtonToDisplay ButtonToDisplay=2;
+}
+message UpdateButtonToDisplay{
+  string filter=1;
+  string Id=2;
+  ButtonToDisplay  ButtonToDisplay=3;
+}
+//---------------
+message LabelMetadata{
+  string ApplicationName=1;
+  string FormName=2;
+  repeated  LabelsElements LabelsElements=3;
+  string CreatedBy=4;
+  string CreateDate =5;
+  string UpdatedDate=6;
+  string UpdatedBy =7;
+  string Status =8;
+  string StatusDate =9;
+}
+//---------------
+message LabelMetadataData{
+  string Id=1;
+  string ApplicationName=2;
+  string FormName=3;
+  repeated  LabelsElements LabelsElements=4;
+  string CreatedBy=5;
+  string CreateDate =6;
+  string UpdatedDate=7;
+  string UpdatedBy =8;
+  string Status =9;
+  string StatusDate =10;
+}
+message LabelsElements {
+    string Key=1;
+    string Value=2;
+    string Type=3;
+}
+
+message InsertLabelMetadata{
+  string Id=1;
+  LabelMetadata LabelMetadata=2;
+}
+message UpdateLabelMetadata{
+  string filter=1;
+  string Id=2;
+  LabelMetadata  LabelMetadata=3;
+}
+message LabelMetadataList {
+  int64  total=1;
+  repeated LabelMetadataData LabelMetadataData=2;
+}
+//---------------
+message LabelMetadataRequest{
+  LabelMetadata LabelMetadata=1;
+}
+//---------------
+service ChatReq {
+  rpc GetDashboardStatistics(ReqDashboardStatistics) returns (StatisticsList);
+  rpc GetStatisticsByUserYearMonth(ReqStatisticsByUserYearMonth) returns (RecommendationsCountByUserMonthYearList);
+  rpc ConnectServer (Req) returns (stream InsertMsg);
+  rpc DownloadFileFromDatabase(FileDownloadRequest) returns (stream File);
+  rpc SendMsg (Msg) returns (Empty);
+  rpc SelectDocumentFromMongo(Search) returns (DataList);
+  rpc SelectSupplierFromMongo(Search) returns  (SupplierList);
+  rpc SelectCustomerFromMongo(Search) returns  (CustomerList);
+  rpc UpdateDocumentToMongo(UpdateRequest) returns (Empty);
+  rpc GetLoginToken(Login) returns (LoginToken);
+  rpc SelectDashboardFromMongo(Search) returns  (DashboardList);
+  rpc InsertDashboardToMongo (Dashboard) returns (Empty);
+  rpc UpdateDashboardToMongo(UpdateDashboard) returns (Empty);
+  rpc GetDashboardContent(DashboardContentReq) returns(DashboardContent);
+  rpc UploadFileToMongo( FileUploadRequest) returns(Empty);
+  rpc UploadFileToMongoClient( stream FileUploadRequest) returns(Empty);
+  rpc UserRegistration(ReqUserRegistration) returns (InsertUserRegistration);
+  rpc SelectUserRegistration(Search) returns  (UserRegistrationList);
+  rpc UpdateUserRegistration(ReqUpdateUserRegistration) returns (Empty);
+  //-----
+  rpc SelectMenuGroupfromDatabase(Search) returns  (MenuGroupList);
+  rpc InsertMenuGrouptoDatabase (MenuGroup) returns (Empty);
+  rpc UpdateMenuGrouptoDatabase(UpdateMenuGroup) returns (Empty);
+  //-----
+  rpc SelectMenuOptionfromDatabase(Search) returns  (MenuOptionList);
+  rpc InsertMenuOptionuptoDatabase (MenuOption) returns (Empty);
+  rpc UpdateMenuOptiontoDatabase(UpdateMenuOption) returns (Empty);
+  //
+  rpc SelectMenufromDatabase(MenuRequest) returns  (MenuList);
+  //-----
+  rpc SelectButtonToDisplayfromDatabase(Search) returns  (ButtonToDisplayList);
+  rpc InsertButtonToDisplaytoDatabase (ButtonToDisplay) returns (Empty);
+  rpc UpdateButtonToDisplaytoDatabase(UpdateButtonToDisplay) returns (Empty);
+  //-----
+  rpc SelectLabelMetadatafromDatabase(Search) returns  (LabelMetadataList);
+  rpc InsertLabelMetadatatoDatabase (LabelMetadata) returns (Empty);
+  rpc UpdateLabelMetadatatoDatabase(UpdateLabelMetadata) returns (Empty);
+}
+
